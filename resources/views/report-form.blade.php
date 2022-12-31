@@ -21,14 +21,15 @@
   
     <div class="col-span-2 p-6">
      <p class="text-lg font-extrabold text-gray-600 uppercase tracking-wider p-2">Not started</p>
-     {{dd($dutieswithoutstatus)}}
-     {{-- @if(count($dutieswithoutstatus)>0)
+    
+    
+       @if(count($dutieswithoutstatus)>0)
          @foreach($dutieswithoutstatus as $duty)
         <p class="text-lg font-semibold text-gray-600">{{$duty->name}}<p>
         <p class="text-base font-normal text-gray-400">{{$duty->description}}</p>
         <x-jet-section-border/>
          @endforeach
          {{$dutieswithoutstatus->links()}}
-    @endif --}}
+    @endif 
     </div>
 </div>

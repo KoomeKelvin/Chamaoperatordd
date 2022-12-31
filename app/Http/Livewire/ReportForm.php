@@ -15,12 +15,17 @@ class ReportForm extends Component
     }
     public function render()
     {
-        return view('report-form', ['thependingduties'=>$this->duties->whereHas('status', function($q) {
+
+        return view('report-form')->with(
+         ['thependingduties'=>$this->duties->whereHas('status', function($q) {
             $q->where('level', 'LIKE',  '%'.'pending'.'%');
-        })->paginate(2)], ['thedoneduties'=>$this->duties->whereHas('status', function($q) {
+        })->paginate(2)])
+        ->with(
+        ['thedoneduties'=>$this->duties->whereHas('status', function($q) {
             $q->where('level', 'LIKE',  '%'.'done'.'%');
-        })->paginate(2)],
-        ['dutieswithoutstatus'=> $this->duties] 
-    );
+        })->paginate(2)]
+        )->with(
+        ['dutieswithoutstatus'=> $this->duties::whereDoesntHave('status')->paginate(2)] 
+        );
     }
 }
