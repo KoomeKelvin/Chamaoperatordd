@@ -17,11 +17,17 @@ class Duty extends Model
 {
     use HasFactory;
     protected $guarded=[];
+
+    protected $dates=[
+        'created_at',
+        'updated_at',
+        'deadline'
+    ];
+    
     public function priority()
     {
         return $this->belongsTo(Priority::class);
     }
-    
 
     public function team()
     {

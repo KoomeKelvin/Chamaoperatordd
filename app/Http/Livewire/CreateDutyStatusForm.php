@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\Duty;
 use App\Models\Status;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Auth;
 
 class CreateDutyStatusForm extends Component
 {
@@ -42,13 +43,15 @@ class CreateDutyStatusForm extends Component
         $this->duties=new Duty;
     }
 
-    public function mount($duties)
+    public function mount()
     {
-        $this->duties=$duties;
+    
     }
+
     public function render()
     {
-        return view('duty-status.duty-status-create', ['theduties'=>$this->duties->latest()->paginate(2)]);
+        $currentTeamId=Auth::user()->currentTeam->id;
+        return view('duty-status.duty-status-create', ['theduties'=>Duty::where('team_id', $currentTeamId)->oldest('deadline')->paginate(5)]);
     }
 
     public function resetFields()

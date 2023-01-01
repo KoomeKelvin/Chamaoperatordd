@@ -1,1 +1,1 @@
-DD
+<span class="text-gray-300 text-lg md:text-xl">Chamaoperator</span><span class="text-purple-800 text-lg md:text-2xl">Diary</span>

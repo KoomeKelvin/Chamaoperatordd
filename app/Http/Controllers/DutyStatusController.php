@@ -14,9 +14,9 @@ class DutyStatusController extends Controller
 
     public function index()
     {
-        $duties=app(Duty::class);
-        return view('duty-status.index', ['duties'=>$duties]);
+        return view('duty-status.index');
     }
+    
     public function store(Request $request)
     {
         $data=Status::validateStatus($request);

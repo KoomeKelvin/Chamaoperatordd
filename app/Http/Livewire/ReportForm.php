@@ -4,28 +4,28 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Gate;
+use App\Models\Duty;
+use Illuminate\Support\Facades\Auth; 
 
 class ReportForm extends Component
 {
     use WithPagination;
-    public $duties;
-    public function mount($duties)
-    {
-        $this->duties=$duties;
-    }
+
     public function render()
     {
 
+        $currentTeamId=Auth::user()->currentTeam->id;
         return view('report-form')->with(
-         ['thependingduties'=>$this->duties->whereHas('status', function($q) {
+         ['thependingduties'=>Duty::where('team_id', $currentTeamId)->whereHas('status', function($q) {
             $q->where('level', 'LIKE',  '%'.'pending'.'%');
-        })->paginate(2)])
+        })->oldest('deadline')->paginate(5)])
         ->with(
-        ['thedoneduties'=>$this->duties->whereHas('status', function($q) {
+        ['thedoneduties'=>Duty::where('team_id', $currentTeamId)->whereHas('status', function($q) {
             $q->where('level', 'LIKE',  '%'.'done'.'%');
-        })->paginate(2)]
+        })->oldest('deadline')->paginate(5)]
         )->with(
-        ['dutieswithoutstatus'=> $this->duties::whereDoesntHave('status')->paginate(2)] 
+        ['dutieswithoutstatus'=>Duty::where('team_id', $currentTeamId)->whereDoesntHave('status')->oldest('deadline')->paginate(5)] 
         );
     }
 }

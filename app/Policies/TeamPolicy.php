@@ -41,7 +41,8 @@ class TeamPolicy
      */
     public function create(User $user)
     {
-        return true;
+        //return true;
+        return count($user->ownedTeams)<2;
     }
 
     /**
