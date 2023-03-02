@@ -13,7 +13,7 @@ the work in between the teams and enable communication easily. You can:
 -**Send reminders for pending work**
 - **Keep a track of achievements** 
 
-## Ours will be a valuable tool, we will ship out for 100/- per user and 1000/- for teams monthly
+## Ours will be a valuable tool, we will ship out for free per user and 1000/- for teams monthly
 
 
 
